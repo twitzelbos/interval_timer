@@ -103,64 +103,77 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
               ),
             ),
-            // Fixed bottom bar: total, START, sound
+            // Fixed bottom bar: sound | START | total
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () => setState(() => _soundOn = !_soundOn),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          _soundOn ? Icons.volume_up : Icons.volume_off,
-                          color: _soundOn ? Colors.white70 : Colors.white30,
-                          size: 22,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          _soundOn ? 'SOUND ON' : 'SOUND OFF',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 2,
-                            color: _soundOn ? Colors.white70 : Colors.white30,
+                  // Left: sound toggle — fixed width so START doesn't shift
+                  SizedBox(
+                    width: 140,
+                    child: GestureDetector(
+                      onTap: () => setState(() => _soundOn = !_soundOn),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _soundOn ? Icons.volume_up : Icons.volume_off,
+                            color:
+                                _soundOn ? Colors.white70 : Colors.white30,
+                            size: 22,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 8),
+                          Text(
+                            _soundOn ? 'SOUND ON' : 'SOUND OFF',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 2,
+                              color:
+                                  _soundOn ? Colors.white70 : Colors.white30,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 32),
-                  SizedBox(
-                    width: 220,
-                    height: 56,
-                    child: FilledButton(
-                      onPressed: _start,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: const Color(0xFF22C55E),
-                        foregroundColor: Colors.black,
-                        textStyle: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 4,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                  // Center: START button
+                  Expanded(
+                    child: Center(
+                      child: SizedBox(
+                        width: 220,
+                        height: 56,
+                        child: FilledButton(
+                          onPressed: _start,
+                          style: FilledButton.styleFrom(
+                            backgroundColor: const Color(0xFF22C55E),
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 4,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text('START'),
                         ),
                       ),
-                      child: const Text('START'),
                     ),
                   ),
-                  const SizedBox(width: 32),
-                  Text(
-                    'Total: ${_formatTotal()}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.white38,
-                      letterSpacing: 1,
+                  // Right: total time — fixed width to balance
+                  SizedBox(
+                    width: 140,
+                    child: Text(
+                      'Total: ${_formatTotal()}',
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white38,
+                        letterSpacing: 1,
+                      ),
                     ),
                   ),
                 ],
