@@ -13,12 +13,14 @@ class TimerScreen extends StatefulWidget {
   final int onSeconds;
   final int offSeconds;
   final int rounds;
+  final bool soundOn;
 
   const TimerScreen({
     super.key,
     required this.onSeconds,
     required this.offSeconds,
     required this.rounds,
+    required this.soundOn,
   });
 
   @override
@@ -94,6 +96,7 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   void _playBeep(TimerPhase nextPhase) {
+    if (!widget.soundOn) return;
     switch (nextPhase) {
       case TimerPhase.work:
         _highBeep.play(_highBeepSource!);

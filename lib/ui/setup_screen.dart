@@ -16,6 +16,7 @@ class _SetupScreenState extends State<SetupScreen> {
   int _onSeconds = 30;
   int _offSeconds = 15;
   int _rounds = 10;
+  bool _soundOn = false;
 
   String _formatInterval(int seconds) {
     if (seconds < 60) return '${seconds}s';
@@ -102,7 +103,31 @@ class _SetupScreenState extends State<SetupScreen> {
                     letterSpacing: 1,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () => setState(() => _soundOn = !_soundOn),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        _soundOn ? Icons.volume_up : Icons.volume_off,
+                        color: _soundOn ? Colors.white70 : Colors.white30,
+                        size: 22,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        _soundOn ? 'SOUND ON' : 'SOUND OFF',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 2,
+                          color: _soundOn ? Colors.white70 : Colors.white30,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: 220,
                   height: 56,
@@ -138,6 +163,7 @@ class _SetupScreenState extends State<SetupScreen> {
           onSeconds: _onSeconds,
           offSeconds: _offSeconds,
           rounds: _rounds,
+          soundOn: _soundOn,
         ),
       ),
     );
