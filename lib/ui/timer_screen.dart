@@ -53,6 +53,9 @@ class _TimerScreenState extends State<TimerScreen> {
 
   Future<void> _generateSounds() async {
     final dir = await getTemporaryDirectory();
+    if (!dir.existsSync()) {
+      dir.createSync(recursive: true);
+    }
     final highPath = '${dir.path}/beep_high.wav';
     final lowPath = '${dir.path}/beep_low.wav';
     final donePath = '${dir.path}/beep_done.wav';
