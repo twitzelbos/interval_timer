@@ -38,119 +38,135 @@ class _SetupScreenState extends State<SetupScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFF0D1117),
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'INTERVAL TIMER',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 6,
-                    color: Colors.white70,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ON interval
-                    Expanded(
-                      child: _SelectorColumn(
-                        label: 'WORK',
-                        color: const Color(0xFF22C55E),
-                        options: _intervalOptions,
-                        selected: _onSeconds,
-                        format: _formatInterval,
-                        onSelected: (v) => setState(() => _onSeconds = v),
-                      ),
-                    ),
-                    const SizedBox(width: 24),
-                    // OFF interval
-                    Expanded(
-                      child: _SelectorColumn(
-                        label: 'REST',
-                        color: const Color(0xFFEF4444),
-                        options: _intervalOptions,
-                        selected: _offSeconds,
-                        format: _formatInterval,
-                        onSelected: (v) => setState(() => _offSeconds = v),
-                      ),
-                    ),
-                    const SizedBox(width: 24),
-                    // Rounds
-                    Expanded(
-                      child: _SelectorColumn(
-                        label: 'ROUNDS',
-                        color: const Color(0xFF3B82F6),
-                        options: _roundOptions,
-                        selected: _rounds,
-                        format: (v) => '$v',
-                        onSelected: (v) => setState(() => _rounds = v),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  'Total: ${_formatTotal()}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white38,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () => setState(() => _soundOn = !_soundOn),
-                  child: Row(
+        child: Column(
+          children: [
+            // Scrollable selectors
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        _soundOn ? Icons.volume_up : Icons.volume_off,
-                        color: _soundOn ? Colors.white70 : Colors.white30,
-                        size: 22,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        _soundOn ? 'SOUND ON' : 'SOUND OFF',
+                      const Text(
+                        'INTERVAL TIMER',
                         style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 2,
-                          color: _soundOn ? Colors.white70 : Colors.white30,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 6,
+                          color: Colors.white70,
                         ),
+                      ),
+                      const SizedBox(height: 32),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: _SelectorColumn(
+                              label: 'WORK',
+                              color: const Color(0xFF22C55E),
+                              options: _intervalOptions,
+                              selected: _onSeconds,
+                              format: _formatInterval,
+                              onSelected: (v) =>
+                                  setState(() => _onSeconds = v),
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _SelectorColumn(
+                              label: 'REST',
+                              color: const Color(0xFFEF4444),
+                              options: _intervalOptions,
+                              selected: _offSeconds,
+                              format: _formatInterval,
+                              onSelected: (v) =>
+                                  setState(() => _offSeconds = v),
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _SelectorColumn(
+                              label: 'ROUNDS',
+                              color: const Color(0xFF3B82F6),
+                              options: _roundOptions,
+                              selected: _rounds,
+                              format: (v) => '$v',
+                              onSelected: (v) => setState(() => _rounds = v),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 220,
-                  height: 56,
-                  child: FilledButton(
-                    onPressed: _start,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xFF22C55E),
-                      foregroundColor: Colors.black,
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 4,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text('START'),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            // Fixed bottom bar: total, START, sound
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () => setState(() => _soundOn = !_soundOn),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          _soundOn ? Icons.volume_up : Icons.volume_off,
+                          color: _soundOn ? Colors.white70 : Colors.white30,
+                          size: 22,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          _soundOn ? 'SOUND ON' : 'SOUND OFF',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 2,
+                            color: _soundOn ? Colors.white70 : Colors.white30,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 32),
+                  SizedBox(
+                    width: 220,
+                    height: 56,
+                    child: FilledButton(
+                      onPressed: _start,
+                      style: FilledButton.styleFrom(
+                        backgroundColor: const Color(0xFF22C55E),
+                        foregroundColor: Colors.black,
+                        textStyle: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 4,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text('START'),
+                    ),
+                  ),
+                  const SizedBox(width: 32),
+                  Text(
+                    'Total: ${_formatTotal()}',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white38,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
