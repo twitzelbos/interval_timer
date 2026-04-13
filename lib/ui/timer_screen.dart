@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 enum TimerPhase { countdown, work, rest, done }
@@ -37,9 +39,9 @@ class _TimerScreenState extends State<TimerScreen> {
   final AudioPlayer _highBeep = AudioPlayer();
   final AudioPlayer _lowBeep = AudioPlayer();
   final AudioPlayer _doneBeep = AudioPlayer();
-  BytesSource? _highBeepSource;
-  BytesSource? _lowBeepSource;
-  BytesSource? _doneBeepSource;
+  DeviceFileSource? _highBeepSource;
+  DeviceFileSource? _lowBeepSource;
+  DeviceFileSource? _doneBeepSource;
 
   @override
   void initState() {
@@ -49,10 +51,17 @@ class _TimerScreenState extends State<TimerScreen> {
     _startTimer();
   }
 
-  void _generateSounds() {
-    _highBeepSource = BytesSource(_buildWav(880, 0.15));
-    _lowBeepSource = BytesSource(_buildWav(440, 0.15));
-    _doneBeepSource = BytesSource(_buildWav(1760, 0.4));
+  Future<void> _generateSounds() async {
+    final dir = await getTemporaryDirectory();
+    final highPath = '${dir.path}/beep_high.wav';
+    final lowPath = '${dir.path}/beep_low.wav';
+    final donePath = '${dir.path}/beep_done.wav';
+    await File(highPath).writeAsBytes(_buildWav(880, 0.15));
+    await File(lowPath).writeAsBytes(_buildWav(440, 0.15));
+    await File(donePath).writeAsBytes(_buildWav(1760, 0.4));
+    _highBeepSource = DeviceFileSource(highPath);
+    _lowBeepSource = DeviceFileSource(lowPath);
+    _doneBeepSource = DeviceFileSource(donePath);
   }
 
   /// Generate a simple sine-wave WAV in memory.
@@ -99,11 +108,11 @@ class _TimerScreenState extends State<TimerScreen> {
     if (!widget.soundOn) return;
     switch (nextPhase) {
       case TimerPhase.work:
-        _highBeep.play(_highBeepSource!);
+        if (_highBeepSource != null) _highBeep.play(_highBeepSource!);
       case TimerPhase.rest:
-        _lowBeep.play(_lowBeepSource!);
+        if (_lowBeepSource != null) _lowBeep.play(_lowBeepSource!);
       case TimerPhase.done:
-        _doneBeep.play(_doneBeepSource!);
+        if (_doneBeepSource != null) _doneBeep.play(_doneBeepSource!);
       case TimerPhase.countdown:
         break;
     }
