@@ -212,6 +212,10 @@ class _TimerScreenState extends State<TimerScreen> {
         ),
     };
 
+    // Scale up fonts on iPad-sized screens (shortest side > 600)
+    final shortSide = MediaQuery.of(context).size.shortestSide;
+    final scale = shortSide > 600 ? 1.5 : 1.0;
+
     return GestureDetector(
       onTap: _phase == TimerPhase.done ? null : _togglePause,
       child: AnimatedContainer(
@@ -229,7 +233,7 @@ class _TimerScreenState extends State<TimerScreen> {
                     Text(
                       label,
                       style: TextStyle(
-                        fontSize: 48,
+                        fontSize: 48 * scale,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 8,
                         color: fg.withValues(alpha: 0.8),
@@ -244,7 +248,7 @@ class _TimerScreenState extends State<TimerScreen> {
                             ? '$_secondsLeft'
                             : _formatTime(_secondsLeft),
                         style: TextStyle(
-                          fontSize: 180,
+                          fontSize: 180 * scale,
                           fontWeight: FontWeight.w900,
                           color: fg,
                           height: 1.0,
@@ -255,7 +259,7 @@ class _TimerScreenState extends State<TimerScreen> {
                       )
                     else
                       Icon(Icons.check_circle_outline,
-                          size: 120, color: fg.withValues(alpha: 0.8)),
+                          size: 120 * scale, color: fg.withValues(alpha: 0.8)),
 
                     const SizedBox(height: 16),
 
@@ -264,7 +268,7 @@ class _TimerScreenState extends State<TimerScreen> {
                       Text(
                         'ROUND $_currentRound of ${widget.rounds}',
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 28 * scale,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 3,
                           color: fg.withValues(alpha: 0.6),
@@ -276,7 +280,7 @@ class _TimerScreenState extends State<TimerScreen> {
                       Text(
                         '${widget.rounds} rounds completed',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 24 * scale,
                           fontWeight: FontWeight.w600,
                           color: fg.withValues(alpha: 0.7),
                         ),
@@ -287,9 +291,9 @@ class _TimerScreenState extends State<TimerScreen> {
                         style: FilledButton.styleFrom(
                           backgroundColor: Colors.white,
                           foregroundColor: bg,
-                          minimumSize: const Size(200, 52),
-                          textStyle: const TextStyle(
-                            fontSize: 20,
+                          minimumSize: Size(200 * scale, 52 * scale),
+                          textStyle: TextStyle(
+                            fontSize: 20 * scale,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 2,
                           ),
