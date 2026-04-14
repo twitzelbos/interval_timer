@@ -1,5 +1,7 @@
 # Interval Timer
 
+<img src="ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" width="128" alt="Interval Timer icon">
+
 A minimal, distraction-free interval timer built for the gym. Designed to be visible from across the room with full-screen color states and oversized typography.
 
 ## Features
