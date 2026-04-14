@@ -20,6 +20,7 @@ A minimal, distraction-free interval timer built for the gym. Designed to be vis
 - iPhone
 - iPad
 - macOS
+- Android
 
 ## Screenshots
 
