@@ -23,15 +23,15 @@ A minimal, distraction-free interval timer built for the gym. Designed to be vis
 
 | Setup | GET READY |
 |-------|-----------|
-| ![Setup](appstore_screenshots/iphone_6.7_setup.png) | ![Get Ready](appstore_screenshots/iphone_6.7_ready.png) |
+| ![Setup](appstore_screenshots/iphone_6.7_setup.png?v=2) | ![Get Ready](appstore_screenshots/iphone_6.7_ready.png?v=2) |
 
 | GO | REST |
 |----|------|
-| ![GO](appstore_screenshots/iphone_6.7_go.png) | ![REST](appstore_screenshots/iphone_6.7_rest.png) |
+| ![GO](appstore_screenshots/iphone_6.7_go.png?v=2) | ![REST](appstore_screenshots/iphone_6.7_rest.png?v=2) |
 
 | DONE |
 |------|
-| ![DONE](appstore_screenshots/iphone_6.7_done.png) |
+| ![DONE](appstore_screenshots/iphone_6.7_done.png?v=2) |
 
 ## Building
 
