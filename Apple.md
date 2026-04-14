@@ -4,7 +4,7 @@ This guide walks through deploying the Interval Timer app to iPads (no Developer
 
 ## Prerequisites
 
-- Apple Developer Program membership ($99/year) — you already have Team ID `YOUR_TEAM_ID`
+- Apple Developer Program membership ($99/year)
 - Xcode installed with your Apple ID signed in
 - Flutter SDK installed
 
@@ -13,7 +13,7 @@ This guide walks through deploying the Interval Timer app to iPads (no Developer
 | Setting | Value |
 |---------|-------|
 | Bundle ID | `com.petertools.intervalTimer` |
-| Team ID | `YOUR_TEAM_ID` |
+| Team ID | *(your Apple Developer Team ID)* |
 | Version | 1.0.0 |
 | Build | 1 |
 | Min iOS | 13.0 |
@@ -50,8 +50,7 @@ This guide walks through deploying the Interval Timer app to iPads (no Developer
 From the project directory:
 
 ```bash
-cd /path/to/project/projects/peter_tools/interval_timer
-
+# From the project root:
 # Clean and build the release IPA
 flutter clean
 flutter pub get
@@ -80,7 +79,7 @@ In Xcode:
 1. Select the **Runner** target
 2. Go to **Signing & Capabilities**
 3. Check **Automatically manage signing**
-4. Select your team (`YOUR_TEAM_ID`)
+4. Select your team
 5. Xcode will create/download the provisioning profile
 6. Close Xcode, run `flutter build ipa --release` again
 
