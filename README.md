@@ -21,9 +21,17 @@ A minimal, distraction-free interval timer built for the gym. Designed to be vis
 
 ## Screenshots
 
-| Setup | GO | REST | DONE |
-|-------|----|------|------|
-| Dark background, green/red/blue chip selectors | Full green screen | Full red screen | Full blue screen |
+| Setup | GET READY |
+|-------|-----------|
+| ![Setup](appstore_screenshots/iphone_6.7_setup.png) | ![Get Ready](appstore_screenshots/iphone_6.7_ready.png) |
+
+| GO | REST |
+|----|------|
+| ![GO](appstore_screenshots/iphone_6.7_go.png) | ![REST](appstore_screenshots/iphone_6.7_rest.png) |
+
+| DONE |
+|------|
+| ![DONE](appstore_screenshots/iphone_6.7_done.png) |
 
 ## Building
 
